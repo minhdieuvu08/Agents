@@ -12,7 +12,7 @@ We utilize Proximal Policy Optimization (PPO) combined with a custom environment
 
 ### 2. LLM-Guided Q-Shaping (Q-Learning + Gemini)
 A novel approach that integrates Large Language Models (LLMs) into the training loop of a population of 20 agents.
-- **Dynamic Heuristic Generation:** Using **Google Gemini 1.5 Flash** to analyze the game's spatial grid and generate Python heuristic logic on-the-fly.
+- **Dynamic Heuristic Generation:** Using **Google Gemini 2.5 Flash** to analyze the game's spatial grid and generate Python heuristic logic on-the-fly.
 - **Q-Injection:** The LLM-generated logic identifies "Good" vs "Bad" actions for discovered states, injecting these biases directly into the Q-table to accelerate learning.
 - **Mass-Shaping:** Automatically applying shaping rules across the entire agent population to optimize exploration.
 
