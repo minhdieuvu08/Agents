@@ -11,7 +11,7 @@ def make_env():
 
 def main():
     # create vectorized env
-    vec_env = DummyVecEnv([make_env for _ in range(4)])
+    vec_env = DummyVecEnv([make_env] * 4)
     # stack frame
     vec_env = VecFrameStack(vec_env, n_stack=4)
 
