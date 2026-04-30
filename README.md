@@ -1,4 +1,4 @@
-# Multi-Algorithm Reinforcement Learning for Atari Space Invaders 👾
+# LLM-Augmented Reinforcement Learning for Atari Space Invaders 👾
 
 This repository explores advanced Reinforcement Learning (RL) techniques to solve the **Atari Space Invaders** environment. The project focuses on two main research directions: **Reward Shaping** with PPO and **LLM-Guided Q-Shaping** using Google Gemini.
 
@@ -49,11 +49,11 @@ A baseline implementation for Tetris using PPO with frame stacking techniques.
 
 ---
 
-## 🏃 Setup & Installation
+## ⚙️ Setup & Installation
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/minhdieuvu08/Agents.git](https://github.com/minhdieuvu08/Agents.git)
+   git clone [https://github.com/minhdieuvu08/LLM-Augmented-RL.git](https://github.com/minhdieuvu08/LLM-Augmented-RL.git)
    cd Agents
    ```
 
