@@ -24,29 +24,21 @@ GEMINI_API_KEY = None
 # --- DEFAULT HEURISTIC CODE ---
 DEFAULT_HEURISTIC_CODE = """
 def heuristic_logic(grid_14x14):
-    # grid_14x14 là numpy array 14x14 (0 hoặc 1)
+    # grid_14x14 là numpy array 14x14 (0 or 1)
     # 0: NOOP, 1: FIRE, 2: RIGHT, 3: LEFT
     
-    # Chiến thuật: Tấn công là phòng thủ tốt nhất
-    # Ưu tiên bắn (FIRE) nếu có địch ở ngay trên đầu
-    
-    # Tìm vị trí người chơi (thường ở hàng cuối - index 13)
     player_row = 13
     
-    # Kiểm tra xem có địch (1) ở các cột phía trên người chơi không
-    # Lưới 14x14, ta quét các hàng từ 0 đến 12
     enemy_above = False
-    for r in range(12, -1, -1): # Quét từ dưới lên
-        if np.sum(grid_14x14[r, :]) > 0: # Có địch ở hàng này
+    for r in range(12, -1, -1):
+        if np.sum(grid_14x14[r, :]) > 0: 
              enemy_above = True
              break
     
     if enemy_above:
-        # Nếu có địch, ưu tiên BẮN hoặc DI CHUYỂN + BẮN
         return 1, 0 # Good: FIRE (1), Bad: NOOP (0)
         
-    # Nếu không thấy địch rõ ràng, di chuyển ngẫu nhiên để tìm
-    return 1, 0 # Vẫn ưu tiên bắn để clear map
+    return 1, 0 
 """
 
 class ShapedQLearningAgent(QLearningAgent):
@@ -98,9 +90,6 @@ class ShapedQLearningAgent(QLearningAgent):
         return avg_reward
 
 def generate_heuristic_function_from_gemini():
-    """
-    Hỏi Gemini để viết hàm Python xử lý logic game.
-    """
     global GEMINI_API_KEY
     if not GEMINI_API_KEY:
         print("   [LLM] No Key. Using Default Heuristic.")

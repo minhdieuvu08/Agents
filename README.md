@@ -1,5 +1,11 @@
 # LLM-Augmented Reinforcement Learning for Atari Space Invaders 👾
 
+<p align="center">
+  <img src="assets/space_invaders_ufo_kil.gif" width="500" alt="Space Invaders Agent Demo">
+  <br>
+  <i>Agent trained with LLM-guided Q-Shaping successfully sniping a high-value UFO.</i>
+</p>
+
 This repository explores advanced Reinforcement Learning (RL) techniques to solve the **Atari Space Invaders** environment. The project focuses on two main research directions: **Reward Shaping** with PPO and **LLM-Guided Q-Shaping** using Google Gemini.
 
 ## 🚀 Key Research Components
