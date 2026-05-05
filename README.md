@@ -1,7 +1,7 @@
 # LLM-Augmented Reinforcement Learning for Atari Space Invaders 👾
 
 <p align="center">
-  <img src="assets/space_invaders_ufo_kil.gif" width="500" alt="Space Invaders Agent Demo">
+  <img src="assets/space_invaders_ufo_kill.gif" width="500" alt="Space Invaders Agent Demo">
   <br>
   <i>Agent trained with LLM-guided Q-Shaping successfully sniping a high-value UFO.</i>
 </p>
@@ -32,17 +32,20 @@ A baseline implementation for Tetris using PPO with frame stacking techniques.
 ## 📁 Project Structure
 ```text
 .
+├── assets/         # Training plots and demo GIFs
+│   ├── space_invaders_ufo_kill.gif
+│   └── ppo_rs_comparison_v2.png
 ├── spaceInvaders/
 │   ├── ppo/
-│   │   ├── ppo_rs_main.py         # PPO Training with Wrapper logic
-│   │   └── ppo_comparison.py      # Script for comparative training & plotting
-│   ├── q_learning/
-│   │   ├── q_shaping_v3.py        # Gemini-guided population training
-│   │   └── train.py               # Base Q-Learning & Discretized Wrapper
-│   └── ppo_rs_comparison_v2.png   # Generated learning curve comparison chart
-├── tetris/                        # RL experiments for Tetris environment
-├── .gitignore                     # Configured for venv, logs, and weights
-└── requirements.txt               # Project dependencies
+│   │   ├── ppo_rs_main.py
+│   │   └── ppo_comparison.py
+│   └── q_learning/
+│       ├── q_shaping_v3.py
+│       ├── train.py
+│       └── test_demo_record.py  
+├── tetris/
+├── .gitignore
+└── requirements.txt
 ```
 
 ---
