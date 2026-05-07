@@ -81,6 +81,11 @@ class RewardCollectorCallback(BaseCallback):
 
 def plot_learning_curves(timesteps_1, rewards_1, label_1, timesteps_2, rewards_2, label_2, total_timesteps, filename="ppo_rs_comparison_v2.png"):
     """Plots a comparison chart of the learning curves."""
+    save_dir = "../../assets/ppo"
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir, exist_ok=True)
+    full_path = os.path.join(save_dir, filename)
+
     plt.figure(figsize=(10, 6))
     
     plt.plot(timesteps_1, rewards_1, label=label_1, color='red', linewidth=1.5)
@@ -93,7 +98,7 @@ def plot_learning_curves(timesteps_1, rewards_1, label_1, timesteps_2, rewards_2
     plt.legend(loc='upper left')
     plt.grid(True, linestyle='--', alpha=0.7)
     
-    plt.savefig(filename, dpi=300)
+    plt.savefig(full_path, dpi=300)
     print(f"\nChart saved at: {filename}")
     plt.show()
 

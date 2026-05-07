@@ -1,3 +1,4 @@
+import os
 import gymnasium as gym
 from stable_baselines3 import PPO
 from stable_baselines3.common.atari_wrappers import AtariWrapper
@@ -56,6 +57,13 @@ def collect_evaluation_rewards(model_path: str, num_episodes: int = 20):
     return episode_rewards, mean_reward
 
 def plot_comparison(rs_rewards, no_rs_rewards, rs_mean, no_rs_mean):
+    save_dir = "../../assets/ppo"
+
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir, exist_ok=True)
+    
+    save_path = os.path.join(save_dir, "evaluation_raw_reward_comparison.png")
+
     plt.figure(figsize=(10, 6))
     
     episodes = np.arange(1, len(rs_rewards) + 1)
@@ -71,7 +79,7 @@ def plot_comparison(rs_rewards, no_rs_rewards, rs_mean, no_rs_mean):
     plt.legend()
     plt.grid(True, linestyle='--', alpha=0.7)
     
-    plt.savefig("evaluation_raw_reward_comparison.png", dpi=300)
+    plt.savefig(save_path, dpi=300)
     print("\nEvaluation plot saved at: evaluation_raw_reward_comparison.png")
     plt.show()
 

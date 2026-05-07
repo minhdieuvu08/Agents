@@ -6,12 +6,7 @@ from gymnasium.core import Wrapper
 import numpy as np
 import os
 
-# --- LỚP WRAPPER CHO REWARD SHAPING  ---
 class SpaceInvadersRewardShaping(Wrapper):
-    """
-    Wrapper tùy chỉnh để tái tạo môi trường chính xác như khi huấn luyện.
-    Lưu ý: Không in ra thông báo mất mạng trong quá trình đánh giá/kiểm thử.
-    """
     def __init__(self, env):
         super().__init__(env)
         self.current_lives = 0
@@ -26,26 +21,21 @@ class SpaceInvadersRewardShaping(Wrapper):
         
         aux_reward = 0.0
 
-        # 1. Phần thưởng khuyến khích Bắn (Action 1 là 'FIRE')
         ACTION_FIRE = 1
         if action == ACTION_FIRE:
             aux_reward += 0.005 
 
-        # 2. Hình phạt cho việc mất mạng (Survival Penalty)
         new_lives = info.get('lives', self.current_lives)
         if new_lives < self.current_lives:
             aux_reward -= 5.0
         
         self.current_lives = new_lives
 
-        # Cộng phần thưởng phụ trợ vào phần thưởng gốc
         shaped_reward = reward + aux_reward
         
         return observation, shaped_reward, terminated, truncated, info
 
-# --- HÀM TẠO MÔI TRƯỜNG MỚI (Cần thiết để tái tạo môi trường) ---
 def make_env(render_mode=None):
-    """Tạo môi trường với AtariWrapper và Reward Shaping Wrapper."""
     env = gym.make("ALE/SpaceInvaders-v5", render_mode=render_mode)
     env = AtariWrapper(env)
     env = SpaceInvadersRewardShaping(env) 
@@ -73,9 +63,6 @@ def main():
     print(f"Std reward: {std_reward:.2f}")
     eval_env.close()
 
-    # --- CHẠY THỬ NGHIỆM TRỰC QUAN (Human Render) ---
-    # Tạo môi trường mới với render_mode="human" để hiển thị cửa sổ game
-    # Lưu ý: Môi trường này sẽ không in ra thông báo mất mạng
     test_env = make_env(render_mode="human")
     obs, _ = test_env.reset()
 

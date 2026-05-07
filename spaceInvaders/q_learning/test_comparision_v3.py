@@ -5,7 +5,8 @@ import matplotlib.pyplot as plt
 
 from train import DiscretizedObservationWrapper, QLearningAgent, GRID_SIZE
 
-
+# Note: These model files are ignored by git. 
+# Run train_q_shaping_v3.py first to generate them.
 STANDARD_MODEL = "q_table_spaceinvaders.pkl"
 SHAPED_MODEL = "q_shaping_v3.pkl" 
 TEST_EPISODES = 100
@@ -132,7 +133,11 @@ def main():
     ax2.set_xlim(1, TEST_EPISODES)
 
     plt.tight_layout()
-    save_path = "q_learning_evaluation_v3plots.png"
+    save_dir = "../../assets/q_learning"
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir, exist_ok=True)
+
+    save_path = os.path.join(save_dir, "q_learning_evaluation_v3plots.png")
     plt.savefig(save_path, dpi=150)
     print(f"\nAnalysis plots saved at '{save_path}'")
     plt.show()

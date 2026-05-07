@@ -1,7 +1,7 @@
 # LLM-Augmented Reinforcement Learning for Atari Space Invaders 👾
 
 <p align="center">
-  <img src="assets/space_invaders_ufo_kill.gif" width="500" alt="Space Invaders Agent Demo">
+  <img src="assets/q_learning/videos/space_invaders_ufo_kill.gif" width="500" alt="Space Invaders Agent Demo">
   <br>
   <i>Agent trained with LLM-guided Q-Shaping successfully sniping a high-value UFO.</i>
 </p>
@@ -32,20 +32,29 @@ A baseline implementation for Tetris using PPO with frame stacking techniques.
 ## 📁 Project Structure
 ```text
 .
-├── assets/         # Training plots and demo GIFs
-│   ├── space_invaders_ufo_kill.gif
-│   └── ppo_rs_comparison_v2.png
-├── spaceInvaders/
-│   ├── ppo/
-│   │   ├── ppo_rs_main.py
-│   │   └── ppo_comparison.py
-│   └── q_learning/
-│       ├── q_shaping_v3.py
-│       ├── train.py
-│       └── test_demo_record.py  
-├── tetris/
-├── .gitignore
-└── requirements.txt
+├── assets/                       # Visualizations and media
+│   ├── ppo/                      # Performance plots for PPO experiments
+│   │   ├── ppo_rs_comparison.png
+│   │   └── evaluation_raw_reward_comparison.png
+│   └── q_learning/               # Visualizations for Q-Learning
+│       ├── videos/               # Gameplay recordings (GIFs)
+│       │   └── space_invaders_ufo_kill.gif
+│       ├── q_agent_comparision_plot.png
+│       └── q_learning_evaluation_v3plots.png
+├── spaceInvaders/                # Space Invaders RL implementations
+│   ├── ppo/                      # Proximal Policy Optimization experiments
+│   │   ├── ppo_logs/             # TensorBoard event logs (Ignored by Git)
+│   │   ├── train_ppo_rs.py       # PPO training with Reward Shaping
+│   │   ├── test_ppo_compare.py   # Evaluation and comparison script
+│   │   └── ...                   
+│   └── q_learning/               # Q-Learning with Reward Shaping
+│       ├── q_learning_logs/      # Training statistics (Ignored by Git)
+│       ├── train_q_shaping_v3.py              # training logic
+│       └── ...                   # Versioned shaping experiments (v1, v2, v3)
+├── tetris/                       # Tetris RL experiment modules
+├── requirements.txt              
+├── .gitignore                    
+└── README.md                     
 ```
 
 ---
@@ -62,8 +71,8 @@ A baseline implementation for Tetris using PPO with frame stacking techniques.
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/minhdieuvu08/LLM-Augmented-RL.git](https://github.com/minhdieuvu08/LLM-Augmented-RL.git)
-   cd Agents
+   git clone https://github.com/minhdieuvu08/LLM-Augmented-RL.git
+   cd LLM-Augmented-RL
    ```
 
 2. **Setup Environment:**
@@ -80,11 +89,17 @@ A baseline implementation for Tetris using PPO with frame stacking techniques.
 
 ## 📈 Methodology
 
-### Reward Shaping Comparison
-By running `ppo_comparison.py`, the system tracks the mean reward over a 100-episode window. The **Reward Shaping (RS)** model typically exhibits faster initial learning and more stable performance due to the survival-focused penalty system.
+### 1. PPO Reward Shaping Analysis
+By running `test_ppo_compare.py`, the system evaluates the PPO models (Baseline vs. RS) over a 100-episode window. The **Reward Shaping (RS)** model typically exhibits more stable survival rates in the early training stages, as visualized in the comparison plots within `assets/ppo/`.
 
-### LLM Q-Shaping Workflow
-1. **Explore:** Agents perform an initial exploration to collect state-action data.
-2. **Consult:** The system sends a grid representation to Gemini.
-3. **Generate:** Gemini returns a Python function `heuristic_logic(grid_14x14)`.
-4. **Inject:** The Q-values are adjusted based on the LLM's spatial reasoning, significantly reducing the "random walk" time.
+### 2. Q-Learning & LLM-Guided Comparison
+The script `test_comparision_v3.py` is used to conduct a rigorous statistical comparison between the standard Q-Learning agent and the LLM-Shaped agent. It generates three types of visualizations:
+- **Raw Reward per Episode:** Direct score comparison across 100 test episodes.
+- **Cumulative Reward:** Visualizes the "learning lead" or total performance advantage over time.
+- **Score Difference:** A bar chart highlighting specific episodes where Reward Shaping outperformed the baseline.
+
+### 3. LLM Q-Shaping Workflow
+1. **Explore:** Agents perform an initial exploration to collect state-action data and discover relevant game states.
+2. **Consult:** The system sends a simplified grid representation of the environment to the Gemini API (Google Gemini 1.5 Flash).
+3. **Generate:** Gemini returns a Python function `heuristic_logic(grid_14x14)` containing spatial reasoning rules.
+4. **Inject:** The Q-values are adjusted based on the LLM's heuristic logic, significantly reducing the "random walk" exploration phase.

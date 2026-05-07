@@ -4,9 +4,9 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.atari_wrappers import AtariWrapper
 from stable_baselines3.common.vec_env import VecVideoRecorder
 
-MODEL_PATH = "/home/minh/projects/agents/spaceInvaders/ppo_spaceinvaders.zip"
+MODEL_PATH = "ppo_spaceinvaders.zip"
 SAVE_VIDEO = False # bi loi khi luu video             
-VIDEO_PATH = "videos/"
+VIDEO_PATH = "../../assets/videos/ppo_spaceinvaders/"
 MAX_STEPS = 5000               
 
 # Create ENV 
